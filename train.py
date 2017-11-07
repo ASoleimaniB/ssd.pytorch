@@ -51,11 +51,11 @@ if not os.path.exists(args.save_folder):
 train_sets = [('2007', 'trainval'), ('2012', 'trainval')]
 # train_sets = 'train'
 ssd_dim = 300  # only support 300 now
-means = (104, 117, 123)  # only support voc now #A: mean of channels?
-num_classes = len(VOC_CLASSES) + 1 #A: 21 class
+means = (104, 117, 123)  # only support voc now                     #A: mean of input channels, used for augmenting dataset (SSDAugmentation) using Expand and Substract (I calculated using matlab: voc2007[114 108 99])
+num_classes = len(VOC_CLASSES) + 1                                  #A: 21 class ?
 batch_size = args.batch_size
-accum_batch_size = 32
-iter_size = accum_batch_size / batch_size
+accum_batch_size = 32                                               #A: unkown
+iter_size = accum_batch_size / batch_size                           #A: unkown
 max_iter = 120000
 weight_decay = 0.0005
 stepvalues = (80000, 100000, 120000)
