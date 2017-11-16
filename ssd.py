@@ -25,23 +25,21 @@ class SSD(nn.Module):
     """
 
     def __init__(self, phase, base, extras, head, num_classes):
-        super(SSD, self).__init__()
+        super(SSD, self).__init__()                                         #?
         self.phase = phase
         self.num_classes = num_classes
-        # TODO: implement __call__ in PriorBox
-        self.priorbox = PriorBox(v2)
+        # TODO: implement __call__ in PriorBox                              #?
+        self.priorbox = PriorBox(v2)                                        #A: PriorBox is defualt box
         self.priors = Variable(self.priorbox.forward(), volatile=True)
         self.size = 300
-
         # SSD network
         self.vgg = nn.ModuleList(base)
         # Layer learns to scale the l2 normalized features from conv4_3
-        self.L2Norm = L2Norm(512, 20)
+        self.L2Norm = L2Norm(512, 20)                                       #A: What is L2Norm?
         self.extras = nn.ModuleList(extras)
 
         self.loc = nn.ModuleList(head[0])
         self.conf = nn.ModuleList(head[1])
-
         if phase == 'test':
             self.softmax = nn.Softmax()
             self.detect = Detect(num_classes, 0, 200, 0.01, 0.45)
@@ -200,6 +198,6 @@ def build_ssd(phase, size=300, num_classes=21):
         print("Error: Sorry only SSD300 is supported currently!")
         return
 
-    return SSD(phase, *multibox(vgg(base[str(size)], 3),
+    return SSD(phase, *multibox(vgg(base[str(size)], 3),                    #why *
                                 add_extras(extras[str(size)], 1024),
                                 mbox[str(size)], num_classes), num_classes)

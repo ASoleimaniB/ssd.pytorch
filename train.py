@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Trai
 parser.add_argument('--version', default='v2', help='conv11_2(v2) or pool6(v1) as last layer')
 parser.add_argument('--basenet', default='vgg16_reducedfc.pth', help='pretrained base model')
 parser.add_argument('--jaccard_threshold', default=0.5, type=float, help='Min Jaccard index for matching')
-parser.add_argument('--batch_size', default=16*2, type=int, help='Batch size for training') #16
+parser.add_argument('--batch_size', default=16, type=int, help='Batch size for training') #16
 parser.add_argument('--resume', default=None, type=str, help='Resume from checkpoint')
 parser.add_argument('--num_workers', default=1, type=int, help='Number of workers used in dataloading') #2
 parser.add_argument('--iterations', default=120000, type=int, help='Number of training iterations')
