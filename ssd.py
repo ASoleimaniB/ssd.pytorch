@@ -32,6 +32,7 @@ class SSD(nn.Module):
         self.priorbox = PriorBox(v2)                                        #A: PriorBox is defualt box
         self.priors = Variable(self.priorbox.forward(), volatile=True)
         self.size = 300
+
         # SSD network
         self.vgg = nn.ModuleList(base)
         # Layer learns to scale the l2 normalized features from conv4_3
@@ -40,6 +41,7 @@ class SSD(nn.Module):
 
         self.loc = nn.ModuleList(head[0])
         self.conf = nn.ModuleList(head[1])
+
         if phase == 'test':
             self.softmax = nn.Softmax()
             self.detect = Detect(num_classes, 0, 200, 0.01, 0.45)
